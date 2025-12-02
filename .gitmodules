@@ -1,0 +1,3 @@
+[submodule "tools/powershell_VBA_sync"]
+	path = tools/powershell_VBA_sync
+	url = https://github.com/Rassvet-public/powershell_VBA_sync
