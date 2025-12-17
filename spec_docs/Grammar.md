@@ -33,9 +33,6 @@
 Привести всю строку к верхнему регистру (UCase).
 Результат записывается в WorkString.
 
-Последовательность записи по форме заказа:
-TYPE/ ISPOLN/ MODEL/ AES/ EX/ SENSOR/ T_LOW/ T_HIGH/ DLINA/ DIAMETR/ SHTUCER/ LKABEL/ TYPEKABEL/ CLASS/ HEAD/ PLUG/ SCHEMA/ GP/ TU/ EXTRA
-
 Пример работы Функции "Parser":
 NormalString: "TS-1388/ A EXD B V3/ 11-1М/ 2NU/ 1EX DB IIВ T4 GB X / PT100/ -50...+350/ 250/ 5 (M8X1)/ 1,5/ KMMFE/ B/ -/ MIT8/ №3/ GP/ TU 4211-012-13282997-2014/ COMENT"
 ParamValue(№):
@@ -75,7 +72,7 @@ SENSOR, TYPE, ISPOLN, EX, AES, MODEL, T_LOW и T_HIGH, SCHEMA, DLINA, DIAMETR и
 при успехе:
 находит свой параметр,
 заполняет ParamValue/ParamStart/ParamEnd,
-вызывает замену фрагмента на токен (см. TokenRules.md), 
+вызывает замену фрагмента на токен, 
 
 
 
@@ -101,7 +98,7 @@ TS 1388
 Это первый значимый параметр в строке после TYPE (или сразу в начале, если TYPE нет).
 
 Примеры из реальных строк:
--                 (нет исполнения)
+- (нет исполнения)
 B F3
 B G2
 B V3
@@ -147,7 +144,7 @@ AEXD BC
 1-1
 Особенности:
 Могут быть чистые числа (1, 3, 5, 11, 21).
-Могут быть буквенно-цифровые коды (3TKP, 5SHM, 13M, 11PLT164, 1-1M, 2-2, 2-1, 2-3, 8-1).
+Могут быть буквенно-цифровые коды (3TKP, 5SHM, 13M, 11PLT164, 11-1M, 2-2, 2-1M, 2-3, 8-1).
 
 4.3 AES — класс безопасности для АЭС
 По примерам:
@@ -487,9 +484,9 @@ o	Если в ISPOLN нет «A» то ищем двигаясь влево в W
 
     ' ----- 20. P_H3 (#20) -----
     Debug.Print LOG_PREFIX & "Шаг #20: P_H3..."
-    If ParamEnd(17) > 0 And ParamEnd(17) < Len(WorkString) Then
+    If ParamEnd(19) > 0 And ParamEnd(19) < Len(WorkString) Then
         Dim tailStart As Long
-        tailStart = ParamEnd(17) + 1
+        tailStart = ParamEnd(19) + 1
         ParamStart(20) = tailStart
         ParamEnd(20) = Len(WorkString)
         ParamValue(20) = Trim$(Mid$(WorkString, tailStart))
